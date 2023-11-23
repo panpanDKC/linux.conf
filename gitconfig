@@ -1,0 +1,9 @@
+[user]
+	email = clery.pelvillain@epita.fr
+	name = clery.pelvillain
+	mail = clery.pelvillain@gmail.com
+[alias]
+    st = status
+    ls = ls-files
+    pft = push --follow-tags
+    cm = commit -m

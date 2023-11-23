@@ -1,0 +1,61 @@
+[window]
+opacity = 0.8
+title = "Term-Alacritty"
+
+[font]
+size = 17
+
+#[key_bindings]
+#{ key: N, mods: Alt, action: OpenNewWindow}
+
+#THEME
+[colors]
+draw_bold_text_with_bright_colors = true
+transparent_background_colors = true
+
+[colors.bright]
+black= "#181918"
+red= "#ff4f40" #Done
+green= "#5fff40" #Done
+yellow= "#fff440" #Done
+blue= "#4f91fe" #Done
+magenta= "#b840ff" #Done
+cyan= "#6eeafe" #Done
+white= "#AAAAAA"
+
+[colors.cursor]
+cursor = "#528bff"
+text = "CellBackground"
+
+#change cursor type Beam,Block,Underline
+[cursor]
+style = "Beam"
+
+[colors.normal]
+black= "#1c1e1e"
+red= "#c91a34"
+green= "#40c91a"
+yellow= "#a5660e"
+blue= "#1a31c9"
+magenta= "#c91ac6"
+cyan= "#4abfe2"
+white= "#ffffff"
+
+[colors.dim]
+black= "#131415"
+red= "#864343"
+green= "#777c44"
+yellow= "#9e824c"
+blue= "#556a7d"
+magenta= "#75617b"
+cyan= "#5b7d78"
+white= "#828482"
+
+[colors.primary]
+background = "0x161616"
+foreground = "#bcbcbc"
+
+[colors.selection]
+background = "#3e4451"
+text = "CellForeground"
+#END THEME

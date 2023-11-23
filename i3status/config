@@ -1,0 +1,69 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        colors = true
+        interval = 5
+        color_good = "#52fe51"
+        color_degraded = "#ffae66"
+        color_bad = "#fe5351"
+        separator = "||"
+}
+
+order += "wireless _first_"
+order += "ethernet _first_"
+order += "battery 0"
+order += "disk /"
+order += "load"
+order += "memory"
+order += "cpu_usage"
+order += "tztime local"
+
+
+wireless _first_ {
+        format_up = "🛜%quality at %essid (%ip)"
+        format_down = "🛜 down"
+}
+
+ethernet _first_ {
+        format_up = "📶 %ip (%speed)"
+        format_down = "📶 down"
+}
+
+battery 0 {
+        format = "🔋 %percentage"
+        path = "/sys/class/power_supply/macsmc-battery/uevent"
+        integer_battery_capacity = true
+        last_full_capacity = true
+        threshold_type = percentage
+        low_threshold = 10
+}
+
+disk "/" {
+        format = "💾 %avail"
+}
+
+load {
+        format = "⏳%1min"
+}
+
+memory {
+        format = "⚙️ %used/%available"
+        threshold_degraded = "1G"
+        format_degraded = "MEMORY < %available"
+}
+
+cpu_usage {
+  format = "🔲 %cpu0"
+  degraded_threshold = 90
+  max_threshold = 95
+}
+
+tztime local {
+        format = "🗓️ %Y-%m-%d %H:%M:%S"
+}
