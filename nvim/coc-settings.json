@@ -1,2 +1,5 @@
 "suggest.noselect":false
 "suggest.enablePreselect": true
+{
+    "pylsp.plugins.pycodestyle.enabled": false
+}

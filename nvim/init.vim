@@ -2,18 +2,27 @@
 call plug#begin('~/.local/share/nvim/site/plugged')
 
 " Declare the list of plugins.
-Plug 'vim-airline/vim-airline' " for the bar
-Plug 'scrooloose/nerdtree' " for the tree
-Plug 'rhysd/vim-clang-format' " for clang-format
-Plug 'sheerun/vim-polyglot' " for nice coloration
-Plug 'jiangmiao/auto-pairs' " for auto closed parenthesis
-Plug 'w0rp/ale' " syntax error analyzer
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " code auto completion
+Plug 'vim-airline/vim-airline' " For status line
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive' " For git status in file
+Plug 'airblade/vim-gitgutter' " For git status in file per line
+Plug 'scrooloose/nerdtree' " For the tree
+Plug 'rhysd/vim-clang-format' " For clang-format
+Plug 'sheerun/vim-polyglot' " For nice coloration
+Plug 'uiiaoo/java-syntax.vim'
+Plug 'jiangmiao/auto-pairs' " For auto closed parenthesis
+Plug 'tpope/vim-surround' " Deal with quotes, brackets, ...
+Plug 'preservim/tagbar' " For tags (class, functions, ...) in file
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " Code auto completion
+Plug 'honza/vim-snippets' " Set of snippets
+Plug 'Yggdroot/indentLine'
+Plug 'lervag/vimtex'
 " Color theme plugins
 Plug 'vv9k/bogster'
-Plug 'lervag/vimtex'
+Plug 'rebelot/kanagawa.nvim'
 Plug 'flazz/vim-colorschemes'
 Plug 'oxfist/night-owl.nvim'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
@@ -40,7 +49,7 @@ set showmatch
 set hlsearch
 set history=1000
 
-colorscheme bogster
+let mapleader = " "
 highlight ExtraWhitespace guibg=blue
 match ExtraWhitespace /\s\+$/
 
@@ -74,15 +83,15 @@ nnoremap <C-f> :NERDTreeFind<CR>
 
 """""""" Clang-format
 
-let g:clang_format#auto_format=1
 let g:clang_format#detect_style_file=1
-autocmd FileType c ClangFormatAutoEnable
+autocmd FileType c,cc,cpp,hxx,hh,js ClangFormatAutoEnable
 
 """""""""""" coc
 set nobackup
 set nowritebackup
 set updatetime=300
 set signcolumn=yes
+filetype plugin on
 
 " Use tab for trigger completion with characters ahead and navigate
 " NOTE: There's always complete item selected by default, you may want to enable
@@ -104,7 +113,51 @@ function! CheckBackspace() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-"""""""" vimtex
+nmap <leader>r <Plug>(coc-rename)
+
+"""""" Gutter
+nmap <leader>g :GitGutterToggle<CR>
+
+""""" Airline
+let g:airline_theme='deus'
+let g:airline_powerline_fonts = 1
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+
+"""""" Indent level
+let g:indentLine_char = '┆'
+noremap <leader>i :IndentLinesToggle<CR>
+let g:indentLine_enabled = 0
+
+"""""" Tagbar
+noremap <leader>b :TagbarToggle<CR>
+
+" Create new tab
+noremap <leader>t :tabe<CR>
+
+" Create new tab
+noremap <leader>c :bd<CR>
+
+" Go to tab by number
+noremap <leader>& 1gt
+noremap <leader>é 2gt
+noremap <leader>" 3gt
+noremap <leader>' 4gt
+noremap <leader>( 5gt
+noremap <leader>§ 6gt
+noremap <leader>è 7gt
+noremap <leader>! 8gt
+noremap <leader>ç 9gt
+noremap <leader>à :tablast<cr>
+
+" Colorschemes
+colorscheme catppuccin
+command Colorcat colorscheme catppuccin
+command Colorkana colorscheme kanagawa
+
+""""" vimtex
 
 " This is necessary for VimTeX to load properly. The "indent" is optional.
 " Note that most plugin managers will do this automatically.
@@ -131,3 +184,10 @@ let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 " Most VimTeX mappings rely on localleader and this can be changed with the
 " following line. The default is usually fine and is the symbol "\".
 let maplocalleader = ","
+
+highlight Normal guibg=none
+highlight NonText guibg=none
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
+hi LineNr guibg=none
+hi CursorLine guibg=NONE guifg=NONE
